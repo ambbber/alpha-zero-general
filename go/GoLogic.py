@@ -20,8 +20,9 @@ class Board():
         self.n = n
 
         # Create the empty board array.
-        self.pieces = np.zeros((n, n))
-        self.pieces.fill(EMPTY)
+        self.pieces = [None] * self.n
+        for i in range(self.n):
+            self.pieces[i] = [0] * self.n
 
         self.ko = None
         self.komi = 7.5

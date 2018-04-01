@@ -182,7 +182,7 @@ class Board():
             self.liberty_counts[x][y] = -1
             self.stone_ages[x][y] = -1
             for (nx, ny) in self._neighbors((x, y)):
-                if self.pieces[nx][ny] == EMPTY:
+                if self.pieces[nx, ny] == EMPTY:
                     # add empty neighbors of (x,y) to its liberties
                     self.liberty_sets[x][y].add((nx, ny))
                 else:
@@ -234,12 +234,12 @@ class Board():
             for (nx, ny) in self._neighbors(action):
                 # check if we're saved by attaching to a friendly group that has
                 # liberties elsewhere
-                is_friendly_group = self.pieces[nx][ny] == color
+                is_friendly_group = self.pieces[nx, ny] == color
                 group_has_other_liberties = len(self.liberty_sets[nx][ny] - set([action])) > 0
                 if is_friendly_group and group_has_other_liberties:
                     return False
                 # check if we're killing an unfriendly group
-                is_enemy_group = self.pieces[nx][ny] == -color
+                is_enemy_group = self.pieces[nx, ny] == -color
                 if is_enemy_group and (not group_has_other_liberties):
                     return False
             # checked all the neighbors, and it doesn't look good.

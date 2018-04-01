@@ -18,10 +18,10 @@ class Board():
 
     def __init__(self, n):
         self.n = n
+
         # Create the empty board array.
-        self.pieces = [None]*self.n
-        for i in range(self.n):
-            self.pieces[i] = [0]*self.n
+        self.pieces = np.zeros((n, n))
+        self.pieces.fill(EMPTY)
 
         self.ko = None
         self.komi = 7.5
@@ -528,6 +528,7 @@ class Board():
                     self.passes_black += 1
                 if color == WHITE:
                     self.passes_white += 1
+            self.history.append(action)
         else:
             raise IllegalMove(str(action))
 

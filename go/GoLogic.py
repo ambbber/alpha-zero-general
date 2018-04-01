@@ -173,8 +173,8 @@ class Board():
         updating group sets and liberties along the way
         """
         for (x, y) in group:
-            self._update_hash((x, y), self.pieces[x][y])
-            self.pieces[x][y] = EMPTY
+            self._update_hash((x, y), self.pieces[x, y])
+            self.pieces[x, y] = EMPTY
         for (x, y) in group:
             # clear group_sets for all positions in 'group'
             self.group_sets[x][y] = set()
@@ -380,7 +380,7 @@ class Board():
             # are in atari.  Capturing these groups are potential escapes.
             for prey_stone in tmp.group_sets[prey_x][prey_y]:
                 for (nx, ny) in tmp._neighbors(prey_stone):
-                    if (tmp[nx][ny] == hunter_player) and (tmp.liberty_counts[nx][ny] == 1):
+                    if (tmp.pieces[nx][ny] == hunter_player) and (tmp.liberty_counts[nx][ny] == 1):
                         possible_escapes |= tmp.liberty_sets[nx][ny]
 
             if not any(tmp.is_ladder_escape((escape_x, escape_y), color, prey=(prey_x, prey_y),
